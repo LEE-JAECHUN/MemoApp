@@ -11,10 +11,17 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var memoList:Array<MemoData> = [MemoData]()  // 메모 데이터를 저장할 변수
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //  페이지 인디케이서 설정을 위한 외형 템플리 구문
+        let pageControl = UIPageControl.appearance()
+        pageControl.pageIndicatorTintColor = .lightGray
+        pageControl.currentPageIndicatorTintColor = .black
+        pageControl.backgroundColor = .white
+        
         return true
     }
 
