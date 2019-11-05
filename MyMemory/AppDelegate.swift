@@ -7,10 +7,36 @@
 //
 
 import UIKit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    lazy var persistentContainer: NSPersistentContainer = {
+       let container = NSPersistentContainer(name: "DataModel")
+        container.loadPersistentStores {
+            if let error = $1 as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        }
+        return container
+    }()
+    
+    func saveContext() {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do{
+                try context.save()
+            }catch let error as NSError {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        }
+    }
+
+    func applicationWillTerminate(_ application: UIApplication) {
+        self.saveContext()
+    }
+    
     var memoList:Array<MemoData> = [MemoData]()  // 메모 데이터를 저장할 변수
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
