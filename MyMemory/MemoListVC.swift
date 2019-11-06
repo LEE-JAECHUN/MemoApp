@@ -10,6 +10,8 @@ import UIKit
 
 class MemoListVC: UITableViewController {
 
+    @IBOutlet var searchBar: UISearchBar!
+    
     lazy var dao = MemoDAO()
     
     // 앱 델리게이트 객체의 참조 정보를 얻어온다
@@ -17,6 +19,9 @@ class MemoListVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 검색 바의 키보드에서 리턴 키가 항상 활성화되어 있도록 처리
+        searchBar.enablesReturnKeyAutomatically = false
         
         // SWRevealViewController 라이브러리의 RevealViewController 객체를 읽어온다
         if let revealVC = self.revealViewController() {
@@ -33,13 +38,10 @@ class MemoListVC: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        
         // 코어 데이터에 저장된 데이터를 가져온다
         self.appDelegate.memoList = self.dao.fetch()
-        
         // 테이블 데이터를 다시 읽어온다. 이에 따라 행을 구성하는 로직이 다시 실행될 것이다.
         self.tableView.reloadData()
-        
         let ud = UserDefaults.standard
         if ud.bool(forKey: UserInfoKey.tutorial) == false {
             let vc = self.instanceTutorialVC(name: "MasterVC")
@@ -47,7 +49,20 @@ class MemoListVC: UITableViewController {
             self.present(vc!, animated: true, completion: nil)
         }
     }
+}
 
+extension MemoListVC: UISearchBarDelegate{
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let keyword = searchBar.text    // 검색 바에 입력된 키워드를 가져온다
+        // 키워드를 적용하여 데이터를 검색하고, 테이블 뷰를 갱신한다'
+        self.appDelegate.memoList = self.dao.fetch(keyword: keyword)
+        self.tableView.reloadData()
+    }
+    
+}
+
+extension MemoListVC {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.appDelegate.memoList.count
@@ -99,4 +114,5 @@ class MemoListVC: UITableViewController {
             self.tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
+
 }
