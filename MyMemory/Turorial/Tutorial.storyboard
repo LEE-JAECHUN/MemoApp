@@ -10,7 +10,7 @@
         <!--Tutorial MasterVC-->
         <scene sceneID="r41-u2-l0n">
             <objects>
-                <viewController storyboardIdentifier="MasterVC" id="Cjf-I9-aOc" customClass="TutorialMasterVC" customModule="페이퍼_잇" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MasterVC" id="Cjf-I9-aOc" customClass="TutorialMasterVC" customModule="PaperIt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6pN-Fw-tmZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -49,7 +49,7 @@
         <!--Tutorial ContentsVC-->
         <scene sceneID="K2x-NG-F8R">
             <objects>
-                <viewController storyboardIdentifier="ContentsVC" id="Iav-d0-gvu" customClass="TutorialContentsVC" customModule="페이퍼_잇" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContentsVC" id="Iav-d0-gvu" customClass="TutorialContentsVC" customModule="PaperIt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ydI-M0-bQb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
