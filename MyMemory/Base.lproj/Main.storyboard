@@ -24,7 +24,7 @@
                             </connections>
                         </searchBar>
                         <view key="tableFooterView" contentMode="scaleToFill" id="W38-NM-iSt">
-                            <rect key="frame" x="0.0" y="924" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="846" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lut-nK-LzL" customClass="CSLogButton" customModule="PaperIt" customModuleProvider="target">
@@ -291,11 +291,64 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="QGx-tc-1Vu"/>
                     </view>
-                    <navigationItem key="navigationItem" title="프로필" id="p2C-gM-Gz7"/>
+                    <navigationItem key="navigationItem" title="프로필" id="p2C-gM-Gz7">
+                        <barButtonItem key="rightBarButtonItem" title="새계정" id="SI1-ht-Lrh">
+                            <connections>
+                                <segue destination="Vek-hu-af1" kind="show" id="4gE-mQ-c5I"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3W3-ka-bjw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="938" y="706"/>
+        </scene>
+        <!--신규 계정 등록-->
+        <scene sceneID="KoB-eG-lxc">
+            <objects>
+                <viewController id="Vek-hu-af1" customClass="JoinVC" customModule="PaperIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bL-s7-Hig">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Account" translatesAutoresizingMaskIntoConstraints="NO" id="QO0-hy-8Ph">
+                                <rect key="frame" x="10" y="99" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mpz-3n-810">
+                                <rect key="frame" x="108" y="99" width="286" height="150"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="HSd-te-6oh">
+                                        <rect key="frame" x="0.0" y="28" width="286" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HSd-te-6oh" id="FQ4-G9-m5h">
+                                            <rect key="frame" x="0.0" y="0.0" width="286" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="EVp-hm-j9e"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="신규 계정 등록" id="ypN-3f-UqI">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="KxD-mW-7lf">
+                            <connections>
+                                <action selector="submit:" destination="Vek-hu-af1" id="C2D-Wg-937"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="profile" destination="QO0-hy-8Ph" id="2sF-St-JQS"/>
+                        <outlet property="tableView" destination="mpz-3n-810" id="7Mb-Dd-GIl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4KW-S9-tO9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1717.3913043478262" y="698.4375"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="VXq-1V-5D4">
@@ -381,4 +434,7 @@
             <point key="canvasLocation" x="187" y="706"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Account" width="90" height="90"/>
+    </resources>
 </document>
