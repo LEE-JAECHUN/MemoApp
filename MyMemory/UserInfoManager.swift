@@ -109,6 +109,15 @@ extension UserInfoManager {
                         self.profile = UIImage(data: imageData)
                     }
                 }
+                
+                // 토큰 정보 추출
+                let accessToken = jsonObject["access_token"] as! String // 액세스 토튼 추출
+                let refreshToken = jsonObject["refresh_token"] as! String   // 리프레시 토튼 추출
+                // 토튼 정보 저장
+                let tk = TokenUtils()
+                tk.save("kr.co.rubypaper.MyMemory", account: "accessToken", value: accessToken)
+                tk.save("kr.co.rubypaper.MyMemory", account: "refreshToken", value: refreshToken)
+                
                 // 3-5 인자값으로 입력된 suceess 클로저 블록을 실행한다
                 success?()
             }else {
@@ -119,14 +128,67 @@ extension UserInfoManager {
         })
     }
     
-    func logout() -> Bool {
+    func logout(completion : (()->Void)? = nil) {
+        // 1. 호출 URL
+        let url = "http://swiftapi.rubypaper.co.kr:2029/userAccount/loggout"
+        // 2. 인증 헤더 구현
+        let tokenUtils = TokenUtils()
+        let header = tokenUtils.getAuthorizationHeader()
+        // 3. API 호출 및 응답 처리
+        let call = Alamofire.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: header)
+        
+        call.responseJSON(completionHandler: { _ in
+            // 3-1 서버로부터 응답이 온 후 처리할 동작을 여기에 작성합니다.
+            // 로컬 로그아웃
+            self.localLogout()
+            // 전달받은 완료 클로저를 실행
+            completion?()
+        })
+    }
+    
+    func localLogout() {
+        // 기본 저장소에 저장된 값을 모두 삭제
         let ud = UserDefaults.standard
         ud.removeObject(forKey: UserInfoKey.loginId)
         ud.removeObject(forKey: UserInfoKey.account)
         ud.removeObject(forKey: UserInfoKey.name)
         ud.removeObject(forKey: UserInfoKey.profile)
         ud.synchronize()
-        return true
+        // 키 체인에 저장된 값을 모두 삭제
+        let tokenUtils = TokenUtils()
+        tokenUtils.delete("kr.co.rubypaper.MyMemory", account: "refreshToken")
+        tokenUtils.delete("kr.co.rubypaper.MyMemory", account: "accessToken")
+    }
+    
+    func newProfile(_ profile: UIImage?, success: (()->Void)? = nil, fail: ((String)->Void)? = nil) {
+        // API 호출 URL
+        let url = "http://swiftapi.rubypaper.co.kr:2029/userAccount/profile"
+        // 인증 헤더
+        let tk = TokenUtils()
+        // 액세스 토큰을 이용하여 인증 헤더 ([String:String])를 만든다
+        let header = tk.getAuthorizationHeader()
+        // 전송할 프로필 이미지
+        let profileData = profile?.pngData()?.base64EncodedString()
+        let param: Parameters = ["profile_image" : profileData!]
+        // 이미지 전송
+        let call = Alamofire.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: header)
+        call.responseJSON(completionHandler: { res in
+            guard let jsonObject = res.result.value as? NSDictionary else {
+                fail?("올바른 응답값이 아닙니다.")
+                return
+            }
+            // 응답 코드 확인. 0이면 성공
+            let resultCode = jsonObject["result_code"] as! Int
+            if resultCode == 0 {
+                // 이미지가 업로드 되었다면 UserDefault에 저장된 이미지도 변경한다
+                self.profile = profile
+                success?()
+            }else{
+                let msg = (jsonObject["error_msg"] as? String) ?? "이미지 프로필 변경이 실패했습니다."
+                fail?(msg)
+            }
+        })
+        
     }
 }
 
