@@ -129,6 +129,10 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
 extension ProfileVC {
     
+    @IBAction func backProfileVC (_ segue: UIStoryboardSegue) {
+        // 단지 프로필 홤녀으로 되돌아오기 위한 표식 역할만 할 뿐이므로 아무 내용도 작성하지 않음.
+    }
+
     @objc func doLogout(_ sender: Any) {
         let msg = "로그아웃 하시겠습니까?"
         let alert = UIAlertController(title: nil, message: msg, preferredStyle: .alert)

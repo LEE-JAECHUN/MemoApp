@@ -186,12 +186,12 @@
 				27FB4DEA23665A61009E68BA /* MemoCell.swift */,
 				2739107A2368053D002BF4B4 /* CSLogButton.swift */,
 				27762C97236A47200031184C /* SideBarVC.swift */,
-				27762C99236A53FB0031184C /* ProfileVC.swift */,
 				DF9AA38A236CD05500D460B5 /* UserInfoManager.swift */,
 				27762C81236A43880031184C /* MyMemory-Bridging-Header.h */,
 				DF43CF71237213CF008775AF /* MyMemory.xcdatamodeld */,
 				2744C16523665B1000DFEA88 /* MemoData.swift */,
 				DF43CF74237215E2008775AF /* MemoDAO.swift */,
+				27762C99236A53FB0031184C /* ProfileVC.swift */,
 				27F12B3F2374DC1000500430 /* JoinVC.swift */,
 			);
 			path = MyMemory;
@@ -506,7 +506,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bixolon.-";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bixolon.mymemorytest;
 				PRODUCT_NAME = PaperIt;
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMemory/MyMemory-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -528,7 +528,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bixolon.-";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bixolon.mymemorytest;
 				PRODUCT_NAME = PaperIt;
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMemory/MyMemory-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

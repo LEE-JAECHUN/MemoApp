@@ -24,7 +24,7 @@
                             </connections>
                         </searchBar>
                         <view key="tableFooterView" contentMode="scaleToFill" id="W38-NM-iSt">
-                            <rect key="frame" x="0.0" y="846" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="924" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lut-nK-LzL" customClass="CSLogButton" customModule="PaperIt" customModuleProvider="target">
@@ -330,6 +330,11 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="U4n-ag-csW">
+                                <rect key="frame" x="189" y="257" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="EVp-hm-j9e"/>
@@ -342,11 +347,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="indicatorView" destination="U4n-ag-csW" id="eue-Lf-KoU"/>
                         <outlet property="profile" destination="QO0-hy-8Ph" id="2sF-St-JQS"/>
                         <outlet property="tableView" destination="mpz-3n-810" id="7Mb-Dd-GIl"/>
+                        <segue destination="EEz-hA-eIa" kind="unwind" identifier="backProfileVC" unwindAction="backProfileVC:" id="0wX-i1-4FS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4KW-S9-tO9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="EEz-hA-eIa" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1717.3913043478262" y="698.4375"/>
         </scene>
