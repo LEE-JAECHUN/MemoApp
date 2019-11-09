@@ -113,7 +113,7 @@ extension UserInfoManager {
                 // 토큰 정보 추출
                 let accessToken = jsonObject["access_token"] as! String // 액세스 토튼 추출
                 let refreshToken = jsonObject["refresh_token"] as! String   // 리프레시 토튼 추출
-                // 토튼 정보 저장
+                // 토튼 정보 저장, 키 체인에 액세스 토큰과 리프레시 토큰을 저장한다
                 let tk = TokenUtils()
                 tk.save("kr.co.rubypaper.MyMemory", account: "accessToken", value: accessToken)
                 tk.save("kr.co.rubypaper.MyMemory", account: "refreshToken", value: refreshToken)
@@ -130,14 +130,22 @@ extension UserInfoManager {
     
     func logout(completion : (()->Void)? = nil) {
         // 1. 호출 URL
-        let url = "http://swiftapi.rubypaper.co.kr:2029/userAccount/loggout"
+        let url = "http://swiftapi.rubypaper.co.kr:2029/userAccount/logout"
         // 2. 인증 헤더 구현
         let tokenUtils = TokenUtils()
         let header = tokenUtils.getAuthorizationHeader()
         // 3. API 호출 및 응답 처리
         let call = Alamofire.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: header)
         
-        call.responseJSON(completionHandler: { _ in
+        call.responseJSON(completionHandler: { res in
+            if let jsonObject = res.result.value as? NSDictionary {
+                if let resultCode = jsonObject["result_code"] {
+                    print("resultCode = \(resultCode)")
+                }
+                if let resultMsg = jsonObject["error_msg"] {
+                    print("resultMsg = \(resultMsg)")
+                }
+            }
             // 3-1 서버로부터 응답이 온 후 처리할 동작을 여기에 작성합니다.
             // 로컬 로그아웃
             self.localLogout()
@@ -154,7 +162,7 @@ extension UserInfoManager {
         ud.removeObject(forKey: UserInfoKey.name)
         ud.removeObject(forKey: UserInfoKey.profile)
         ud.synchronize()
-        // 키 체인에 저장된 값을 모두 삭제
+        // 키 체인에 액세스 토큰, 리프레시 토큰 삭제
         let tokenUtils = TokenUtils()
         tokenUtils.delete("kr.co.rubypaper.MyMemory", account: "refreshToken")
         tokenUtils.delete("kr.co.rubypaper.MyMemory", account: "accessToken")

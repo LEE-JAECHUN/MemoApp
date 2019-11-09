@@ -188,7 +188,7 @@ extension ProfileVC {
             tf.isSecureTextEntry = true
         })
         // 알림창 버튼 추가
-        loginAlert.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: { (_) in
+        loginAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
             self.isCalling = false
         }))
         loginAlert.addAction(UIAlertAction(title: "Login", style: .destructive, handler: { (_) in
