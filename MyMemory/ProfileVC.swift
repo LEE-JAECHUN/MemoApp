@@ -240,6 +240,8 @@ extension ProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDele
         }
         
         let alert = UIAlertController(title: nil, message: "사진을 가져올 곳을 선택해주세요.", preferredStyle: .actionSheet)
+        // 스크린 전체화면으로 보이게 설정
+        alert.modalPresentationStyle = .fullScreen
         // 카메라를 사용할 수 있으면 ?
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             alert.addAction(UIAlertAction(title: "카메라", style: .default, handler: { (_) -> () in
